@@ -3,6 +3,8 @@ const FEED_URL =
 const POSTS_PER_PAGE = 5;
 let allPosts = [], currentPage = 1;
 
+console.log('Substack script loaded, waiting for fetch...');
+
 fetch(FEED_URL)
   .then(r => r.json())
   .then(data => {
@@ -16,6 +18,7 @@ fetch(FEED_URL)
           .replace(/<[^>]*>/g,'').slice(0,200)+'…'
       }));
     renderPage(1);
+    console.log('Rendered posts:', allPosts.length);
     renderPagination();
   })
   .catch(() => {
